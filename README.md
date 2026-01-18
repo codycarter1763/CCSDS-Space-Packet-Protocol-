@@ -61,9 +61,28 @@ Mission specific data block where data such as timestamps like elapsed time, sen
 Optional data block to transfer any additonal information not transmitted by the primary header if the mission requires it.
 
 # Implementation on the STM32 Blackpill
+The STM32 Blackpill is a very powerful and low profile microcontroller based on the STM32F411CEU6 processor. I chose this board compared to the ESP32 or Arduino to gain experience in developing with the STM32 board.
+
+<img width="425" height="247" alt="image" src="https://github.com/user-attachments/assets/0922252b-bd32-4584-8224-7a9963c0a52f" />
+
 ## Schematic
-## Code Analysis
+Below is the schematic for the demo including two STM32 Blackpill boards, an OLED screen, and a DHT11 temperature and humidity sensor. Refer to the attached files in the repository for the transmitter and receiver code.
+
+<img width="3000" height="1829" alt="circuit_image (1)" src="https://github.com/user-attachments/assets/1f9da096-edb5-4659-ad2d-d9654f5292cf" />
+
 
 # Finished Product
+Once the header is packed on the transmitter side, the header is sent in a packet via UART between the two STM32 boards. On the receiver side, the packet is decoded and shown via the serial monitor that shows the various flags and data sent from the transmitter.
+
+``` cpp
+Version=0 Packet Type=0 PID=1 Secondary Flag=0 Sequence=91 Temperature=23 C Humidity=36 %
+Version=0 Packet Type=0 PID=1 Secondary Flag=0 Sequence=92 Temperature=23 C Humidity=37 %
+Version=0 Packet Type=0 PID=1 Secondary Flag=0 Sequence=93 Temperature=23 C Humidity=36 %
+```
+
+Then, the temperature and humidity is displayed on the OLED screen, showing a sucessful data transfer.
 
 # Conclusion
+This repository showed an implementation of the CCSDS Space Packet Protocol for data transmission between two devices. This project is intended as a learning reference for understanding CCSDS packets and how to apply this concept to embedded systems. 
+
+Feel free to take what I did and expand on it.
